@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello React</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
+  </head>
+  <body>
+    <div id="greeting"></div>
+
+    <script type="text/babel">
+      var Greeting = React.createClass({
+        greetPopup: function(){
+          alert(this.props.children + ' ' + this.props.name);
+        },
+        render: function(){
+          return <div>
+            <h1>{this.props.children} {this.props.name}</h1>
+            <button onClick={this.greetPopup}>Greet</button>
+          </div>;
+        }
+      });
+      ReactDOM.render(
+        <Greeting name="John">Hi</Greeting>,
+        document.getElementById('greeting')
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello React</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
+  </head>
+  <body>
+    <div id="my-form"></div>
+
+    <script type="text/babel">
+      var Status = React.createClass({
+        render: function(){
+          return <div>
+            {this.props.email} subscribed!
+          </div>
+        }
+      });
+      var MyForm = React.createClass({
+        getInitialState: function(){
+          return {
+            subscribed: false,
+            email: false
+          };
+        },
+        subscribe: function(e){
+          e.preventDefault();
+          var email = this.refs.email.value.trim();
+          this.setState({ subscribed: true });
+          this.setState({ email: email });
+          console.log(email);
+          this.refs.email.value = '';
+          return;
+        },
+        render: function(){
+          return <div>
+            {this.state.subscribed ? <Status email={this.state.email} /> : null}
+            <form onSubmit={this.subscribe}>
+              <label htmlFor="email">Email: </label>
+              <input type="text" placeholder="Enter Email" ref="email" />
+              <input type="submit" value="submit" />
+            </form>
+          </div>;
+        }
+      });
+      ReactDOM.render(
+        <MyForm />,
+        document.getElementById('my-form')
+      );
+    </script>
+  </body>
+</html>
